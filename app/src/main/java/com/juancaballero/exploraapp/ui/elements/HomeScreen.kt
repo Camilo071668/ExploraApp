@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,19 +18,16 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun HomeScreen(onLogout: () -> Unit, onClickTouristic: () -> Unit) {
-    Scaffold { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(text = "¡Bienvenido!", fontSize = 24.sp)
-            Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = onLogout) {
-                Text("Cerrar Sesión")
+    Scaffold(
+        topBar = {
+            TopAppBar(title = { Text("ExploraApp") })
+        },
+        floatingActionButton = {
+            FloatingActionButton(onClick = {onClickTouristic()}) {
+                Icon(Icons.Default.Add, contentDescription = null)
             }
         }
+    ) { innerPadding ->
+        Column(modifier = Modifier.padding(innerPadding)) { }
     }
 }

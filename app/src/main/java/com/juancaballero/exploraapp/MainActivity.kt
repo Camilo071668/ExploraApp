@@ -18,10 +18,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.juancaballero.exploraapp.ui.elements.AddTouristicPlaceScreen
 import com.juancaballero.exploraapp.ui.elements.HomeScreen
 import com.juancaballero.exploraapp.ui.elements.LoginScreen
 import com.juancaballero.exploraapp.ui.elements.RegisterScreen
-import com.juancaballero.exploraapp.ui.elements.addTouristicPlaceScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,7 +88,7 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                     composable("touristicPlaces") {
-                        addTouristicPlaceScreen()
+                        AddTouristicPlaceScreen()
                     }
 
                 }

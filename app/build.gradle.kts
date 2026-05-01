@@ -1,23 +1,17 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
-    id("com.google.gms.google-services")
-
-
+    alias(libs.plugins.google.services)
 }
 
 android {
     namespace = "com.juancaballero.exploraapp"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.juancaballero.exploraapp"
         minSdk = 26
-        targetSdk = 36
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -64,9 +58,9 @@ dependencies {
     val nav_version = "2.9.7"
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
-    //firebase
-    implementation(platform("com.google.firebase:firebase-bom:34.12.0"))
+    // Firebase
+    implementation(platform(libs.firebase.bom))
 
-    //auth
-    implementation(libs.firebase.auth)
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
 }
