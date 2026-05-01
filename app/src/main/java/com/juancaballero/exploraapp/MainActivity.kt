@@ -27,72 +27,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
-        // Inicializamos Firebase Auth
-        val auth = Firebase.auth
-
         setContent {
-            ExploraAppTheme {
-                val myNavController = rememberNavController()
-
-                // 1. LÓGICA DE PERSISTENCIA: 
-                // Si auth.currentUser no es nulo, el usuario ya inició sesión antes.
-                val startDest = if (auth.currentUser != null) "home" else "login"
-
-                NavHost(
-                    navController = myNavController,
-                    startDestination = startDest, // Dinámico según la sesión
-                    modifier = Modifier.fillMaxSize(),
-                ) {
-                    // Pantalla de Login
-                    composable("login") {
-                        LoginScreen(
-                            onLoginSuccess = {
-                                // Al loguearse con éxito, vamos a Home y limpiamos el historial
-                                myNavController.navigate("home") {
-                                    popUpTo("login") { inclusive = true }
-                                }
-                            },
-                            onNavigateToRegister = {
-                                myNavController.navigate("register")
-                            }
-                        )
-                    }
-
-                    // Pantalla de Registro
-                    composable("register") {
-                        RegisterScreen(
-                            onRegisterSuccess = {
-                                // Si se registra, usualmente lo mandamos a la Home directamente
-                                myNavController.navigate("home") {
-                                    popUpTo("register") { inclusive = true }
-                                }
-                            },
-                            onNavigateToLogin = {
-                                myNavController.navigate("login")
-                            },
-                            onBackClick = {
-                                myNavController.popBackStack()
-                            }
-                        )
-                    }
-
-                    composable("home") {
-                        HomeScreen(
-                            onClickTouristic = {myNavController.navigate("touristicPlaces")},
-                            onLogout = {
-                                myNavController.navigate("login") {
-                                    popUpTo("home") { inclusive = true }
-                                }
-                            }
-                        )
-                    }
-                    composable("touristicPlaces") {
-                        AddTouristicPlaceScreen()
-                    }
-
-                }
-            }
+            navigationApp()
         }
     }
 }
